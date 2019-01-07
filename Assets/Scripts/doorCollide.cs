@@ -12,7 +12,10 @@ public class doorCollide : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            SceneManager.LoadScene(loadLevel);
+          
+            //if () { 
+            // SceneManager.LoadScene(loadLevel);
+            //  }
         }
     }
 

@@ -10,14 +10,17 @@ public class dialogueManager : MonoBehaviour {
     private Queue<string> sentences;
     public static bool dialogueActive;
     public GameObject nextbtn;
-     public void StartDialogue(Dialogue dialogue)
+    public GameObject fireChoose;
+     public void  StartDialogue(Dialogue dialogue)
      {
+
          nextbtn.SetActive(true);
          dialogueActive = true;
          PauseMenu.GameIsPaused = true;
          sentences = new Queue<string>();
           nameText.text = dialogue.name;
           sentences.Clear();
+          Time.timeScale = 0.0f;
 
 
          foreach (string sentence in dialogue.sentences)
@@ -41,17 +44,30 @@ public class dialogueManager : MonoBehaviour {
 
      void EndDialogue()
      {
+         Time.timeScale = 1.0f;
          nextbtn.SetActive(false);
          PauseMenu.GameIsPaused = false;
          dialoguetext.text ="END TRANSMISION";
 
+        GameController.level = 3;
+         if (GameController.level == 1)
+         {
+             GameObject.Find("Panel").SetActive(false);
+         }
          if (GameController.level == 2)
          {
-
-
+             fireChoose.SetActive(true);
              GameController thing = GameObject.Find("Game Controller").GetComponent<GameController>();
-             thing.goodAns = thing.newQuestion();
+             thing.goodAns = GameObject.Find("Game Controller").GetComponent<Questions>().newQuestion();
          }
+         if(GameController.level ==3)
+        {
+             InsideController thing = GameObject.Find("GameController").GetComponent<InsideController>();
+            thing.goodAns = GameObject.Find("GameController").GetComponent<Questions>().newQuestion();
+
+           
+        }
+         
          dialogueActive = false;
      }
 
