@@ -5,6 +5,7 @@ using System.IO;
 using UnityEngine.UI;
 public class Questions : MonoBehaviour {
     public Text question;
+    public string ans;
 	// Use this for initialization
 	void Start () {
 		
@@ -28,7 +29,7 @@ public class Questions : MonoBehaviour {
             random = Random.Range(0, lines.Length);
         }
 
-
+        ans = lines[random + 1];
 
         question.text = lines[random];
 
