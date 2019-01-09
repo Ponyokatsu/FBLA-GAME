@@ -14,10 +14,6 @@ TagManager:
   - Coin
   - PlayerRay
   - Rocket
-  - Rooms
-  - SpawnPoint
-  - boardingParty
-  - PlayerBig
   layers:
   - Default
   - TransparentFX
@@ -75,7 +71,4 @@ TagManager:
     locked: 0
   - name: VFX
     uniqueID: 738997965
-    locked: 0
-  - name: weapon
-    uniqueID: 4222251211
     locked: 0
