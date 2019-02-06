@@ -23,6 +23,7 @@ public class RoomTemplates : MonoBehaviour {
                 {
                     Instantiate(doors, rooms[i].transform.position, Quaternion.identity);
                     spawnedDoors = true;
+                    GameObject.Find("fadingPlaceBombLvlChange").GetComponent<startFadeDoor>().enabled = true;
                 }
             }
         }

@@ -10,49 +10,70 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed;
     public float startHealth;
-    private float health;
+    public float health;
     public Text healthDisplay;
     public GameObject gameOverUI;
     private Rigidbody2D myRigidBody;
-    private bool facingRight;
     public Image healthBar;
- 
+    public Animator animator;
+    public bool ani;
 
     // Update is called once per frame
     void Start()
     {
+        ani = false;
         health = startHealth;
-        facingRight = true;
-        myRigidBody = GetComponent<Rigidbody2D>();
     }
     
     void FixedUpdate()
     {
-
-        if (Input.GetAxisRaw("Horizontal") > -.5f || Input.GetAxisRaw("Horizontal") < -0.5f)
-        {
-            transform.Translate(new Vector3(Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime, 0f, 0f));
-        }
-        if (Input.GetAxisRaw("Vertical") > -.5f || Input.GetAxisRaw("Vertical") < -0.5f)
+        if (!PauseMenu.GameIsPaused && !dialogueManager.dialogueActive)
+        { if (Input.GetAxisRaw("Horizontal") > -.5f || Input.GetAxisRaw("Horizontal") < -0.5f)
             {
+              //  AudioManager.instance.Play("footsteps");
+                transform.Translate(new Vector3(Input.GetAxisRaw("Horizontal") * moveSpeed * Time.deltaTime, 0f, 0f));
+            }
+            if (Input.GetAxisRaw("Vertical") > -.5f || Input.GetAxisRaw("Vertical") < -0.5f)
+            {
+              //  AudioManager.instance.Play("footsteps");
                 transform.Translate(new Vector3(0f, Input.GetAxisRaw("Vertical") * moveSpeed * Time.deltaTime, 0f));
             }
-        if (health <= 0)
-        {
-
-            gameOverUI.SetActive(true);
+            if (health <= 0)
+            {
+                GameOver();
+            }
+            healthDisplay.text = "HEALTH: " + health;
         }
-        healthDisplay.text = "HEALTH: " + health;
         
     }
+    public void GameOver()
+    {
+        Debug.Log("test");
+        AudioManager.instance.Stop();
+        AudioManager.instance.Play("Defeat");
+        UponLoadTitle.streak = 0;
+        gameOverUI.SetActive(true);
+        animator.SetTrigger("Die");
+        Destroy(gameObject, 1.0f);
+    }
+    
+
+    
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        //Debug.Log("hit");
         if (other.CompareTag("Enemy"))
         {
             health--;
             Destroy(other.gameObject);
             healthBar.fillAmount = health / startHealth;
         }
+       
     }
+
 }
+
+    
+    
+

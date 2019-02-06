@@ -50,6 +50,7 @@ public class GameController : MonoBehaviour {
         else
         {
             panel.SetActive(false);
+
         }
 	}
 
@@ -74,7 +75,7 @@ public class GameController : MonoBehaviour {
     {
         //starts second dialogue if it is toggled
         panel.SetActive(true);
-
+       
         if (Settings.dialogueToggle)
         {
             Dialogue dialogue1 = new Dialogue(new string[] { "Congratulations. You have defeated the first wave", "The enemy is launching a counterattack of four enemies", "Our intel has determined that one of them is the enemy boarding party.", "The other three ships are decoys", "Deocde the intercepted intel we provided to know which ship to shoot", "Make sure to shoot the right ship because you only have 1 missile capable of breaking through their armor." }
@@ -83,6 +84,8 @@ public class GameController : MonoBehaviour {
         }
         else
         {
+            //GameObject.Find("next").SetActive(false);
+            GameObject.Find("name").SetActive(false);
             fireChoose.SetActive(true);
             goodAns = GetComponent<Questions>().newQuestion();
 
@@ -109,15 +112,15 @@ public class GameController : MonoBehaviour {
 
         StartCoroutine(switchScene());
         level = 3;
-        //SceneManager.LoadScene("InsideShipNew");
     }
     //waits 3 seconds for player to reach enemy before switching scenes
     IEnumerator switchScene()
     {
-        
+        AudioManager.instance.Stop();
         yield return new WaitForSeconds(3);
         animator.SetTrigger("fade_out");
-       // SceneManager.LoadScene("InsideShipNew");
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene("InsideShipNew");
     }
     //checks if player has hit the correct ship and switches scenes. 
     public void checkAns(string name)
@@ -143,8 +146,8 @@ public class GameController : MonoBehaviour {
         if (System.Convert.ToChar(name) == System.Convert.ToChar(goodAns))
         {
 
-           // stageThree();
-            UponLoadTitle.streak++;
+            stageThree();
+            //UponLoadTitle.streak++;
 
         }
         else

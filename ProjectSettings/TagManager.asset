@@ -14,6 +14,18 @@ TagManager:
   - Coin
   - PlayerRay
   - Rocket
+  - Rooms
+  - SpawnPoint
+  - boardingParty
+  - PlayerBig
+  - Wall
+  - A
+  - B
+  - C
+  - D
+  - ansB
+  - ansC
+  - ansD
   layers:
   - Default
   - TransparentFX
@@ -23,7 +35,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Minimap
   - 
   - 
   - 

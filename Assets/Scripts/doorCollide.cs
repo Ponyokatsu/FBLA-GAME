@@ -7,47 +7,31 @@ public class doorCollide : MonoBehaviour
 {
     public GameObject gameOverUI;
     public GameObject door;
-     public string loadLevel;
 
+     void Start()
+    {
+   
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log(GameObject.Find("GameController").GetComponent<InsideController>().goodAns);
-        if (other.CompareTag("Player"))
+     if (other.CompareTag("Player"))
         {
+            Debug.Log("ksfksf");
+            string ans = GameObject.Find("GameController").GetComponent<InsideController>().goodAns;
+            if (tag.Equals(ans))
+            {
+                SceneManager.LoadScene("reactor");
+             
+            }
+            else
+            {
 
-            if (GameObject.Find("GameController").GetComponent<Questions>().ans.Equals("A") && door.name.Equals("ansA"))
-            {
-                SceneManager.LoadScene(loadLevel);
-            }
-            else if (GameObject.Find("GameController").GetComponent<Questions>().ans.Equals("B") && door.name.Equals("ansB"))
-            {
-                SceneManager.LoadScene(loadLevel);
-            }
-            else if (GameObject.Find("GameController").GetComponent<Questions>().ans.Equals("C") && door.name.Equals("ansC"))
-            {
-                SceneManager.LoadScene(loadLevel);
-            }
-            else if (GameObject.Find("GameController").GetComponent<Questions>().ans.Equals("D") && door.name.Equals("ansD"))
-            {
-                SceneManager.LoadScene(loadLevel);
-            }
-            else { gameOverUI.SetActive(true); }
+                GameObject.Find("spriteEx").GetComponent<PlayerController>().GameOver();
 
+            }
         }
         }
 
 }
 
-/*
-public class doorCollide : MonoBehaviour
-{
-    private string loadlevel;
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-
-            SceneManager.LoadScene("InsideShip2");
-    }
-}
-*/

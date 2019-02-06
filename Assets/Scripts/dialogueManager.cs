@@ -45,7 +45,6 @@ public class dialogueManager : MonoBehaviour {
      {
          Time.timeScale = 1.0f;
          nextbtn.SetActive(false);
-         PauseMenu.GameIsPaused = false;
          dialoguetext.text ="END TRANSMISION";
 
          if (GameController.level == 1)
@@ -59,8 +58,18 @@ public class dialogueManager : MonoBehaviour {
              GameController thing = GameObject.Find("Game Controller").GetComponent<GameController>();
              thing.goodAns = GameObject.Find("Game Controller").GetComponent<Questions>().newQuestion();
          }
-         
-         dialogueActive = false;
+        if (GameController.level == 3)
+        {
+
+            GameObject.Find("name").SetActive(false);
+            InsideController thing = GameObject.Find("GameController").GetComponent<InsideController>();
+            thing.goodAns = GameObject.Find("GameController").GetComponent<Questions>().newQuestion();
+
+
+        }
+
+
+        dialogueActive = false;
      }
 
 }

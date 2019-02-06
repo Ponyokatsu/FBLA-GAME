@@ -28,7 +28,14 @@ public class EnemyProjectile : MonoBehaviour
         transform.up = direction;
         transform.position += direction * speed * Time.deltaTime;
     }
-    
 
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Wall")|| other.CompareTag("Rooms"))
+        {
+            Destroy(gameObject);
+
+        }
+    }
 
 }

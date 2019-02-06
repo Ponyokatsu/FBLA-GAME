@@ -6,15 +6,16 @@ using UnityEngine.UI;
 public class UponLoadTitle : MonoBehaviour {
     public static int streak = 0;
     public Text streakTxt;
-	// Use this for initialization
+    public GameObject victory;
+	//loads music and sets streak every time the menu is loaded
 	void Start () {
         AudioManager.instance.Play("Title");
         streakTxt.text = "Current streak: " + streak;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
+        if (streak == 3)
+        {
+            victory.SetActive(true);
+        }
 	}
 
     
